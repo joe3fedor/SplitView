@@ -12,6 +12,9 @@
 
 @interface MasterViewController : UITableViewController
 
+@property (nonatomic, retain) NSArray *siteNames;
+@property (nonatomic, retain) NSArray *siteAddresses;
+
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
 @end

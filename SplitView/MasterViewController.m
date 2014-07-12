@@ -27,12 +27,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    _siteNames = [[NSArray alloc] initWithObjects:@"Yahoo", @"Google",
+                  @"Apple", @"eBookFrenzy", nil];
+    
+    _siteAddresses = [[NSArray alloc]
+                      initWithObjects:@"http://www.yahoo.com",
+                      @"http:/www.google.com", @"http://www.apple.com",
+                      @"http://www.ebookfrenzy.com", nil];
+    
+    self.detailViewController = (DetailViewController *)
+    [[self.splitViewController.viewControllers lastObject]
+     topViewController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,15 +65,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return _siteNames.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView
+                             dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault
+                reuseIdentifier:CellIdentifier];
+    }
+    
+    //NSDate *object = _objects[indexPath.row];
+    //cell.textLabel.text = [object description];
+    
+    cell.textLabel.text = _siteNames[indexPath.row];
     return cell;
 }
 
@@ -104,10 +119,18 @@
 }
 */
 
+//could use something like this to load my webview with the form to fill out.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = _objects[indexPath.row];
-    self.detailViewController.detailItem = object;
+    NSString *urlString = [_siteAddresses
+                           objectAtIndex:indexPath.row];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    self.detailViewController.webView.scalesPageToFit = YES;
+    
+    [self.detailViewController.webView loadRequest:request];
 }
 
 @end
