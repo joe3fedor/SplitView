@@ -22,6 +22,7 @@
 		9BB183B81971BEC700F9C5BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB183971971BEC700F9C5BE /* UIKit.framework */; };
 		9BB183C01971BEC700F9C5BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BB183BE1971BEC700F9C5BE /* InfoPlist.strings */; };
 		9BB183C21971BEC700F9C5BE /* SplitViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB183C11971BEC700F9C5BE /* SplitViewTests.m */; };
+		9BB184111971CB0300F9C5BE /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB184101971CB0300F9C5BE /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		9BB183BD1971BEC700F9C5BE /* SplitViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SplitViewTests-Info.plist"; sourceTree = "<group>"; };
 		9BB183BF1971BEC700F9C5BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9BB183C11971BEC700F9C5BE /* SplitViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewTests.m; sourceTree = "<group>"; };
+		9BB1840F1971CB0300F9C5BE /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		9BB184101971CB0300F9C5BE /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 				9BB183A21971BEC700F9C5BE /* AppDelegate.h */,
 				9BB183A31971BEC700F9C5BE /* AppDelegate.m */,
 				9BB183A51971BEC700F9C5BE /* Main.storyboard */,
+				9BB1840F1971CB0300F9C5BE /* TableViewController.h */,
+				9BB184101971CB0300F9C5BE /* TableViewController.m */,
 				9BB183A81971BEC700F9C5BE /* MasterViewController.h */,
 				9BB183A91971BEC700F9C5BE /* MasterViewController.m */,
 				9BB183AB1971BEC700F9C5BE /* DetailViewController.h */,
@@ -257,6 +262,7 @@
 				9BB183A41971BEC700F9C5BE /* AppDelegate.m in Sources */,
 				9BB183AA1971BEC700F9C5BE /* MasterViewController.m in Sources */,
 				9BB183A01971BEC700F9C5BE /* main.m in Sources */,
+				9BB184111971CB0300F9C5BE /* TableViewController.m in Sources */,
 				9BB183AD1971BEC700F9C5BE /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

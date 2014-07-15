@@ -1,39 +1,41 @@
 //
-//  MasterViewController.m
+//  TableViewController.m
 //  SplitView
 //
 //  Created by Joseph Fedor on 7/12/14.
 //  Copyright (c) 2014 Joseph Fedor. All rights reserved.
 //
 
-#import "MasterViewController.h"
-
+#import "TableViewController.h"
 #import "DetailViewController.h"
 
-@interface MasterViewController () {
-    NSMutableArray *_objects;
-}
+@interface TableViewController ()
+
 @end
 
-@implementation MasterViewController
+@implementation TableViewController
 
-- (void)awakeFromNib
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self.clearsSelectionOnViewWillAppear = NO;
-    self.preferredContentSize = CGSizeMake(320.0, 600.0);
-    [super awakeFromNib];
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _siteNames = [[NSArray alloc] initWithObjects:@"Yahoo", @"Google",
-                  @"Apple", @"eBookFrenzy", nil];
     
-    _siteAddresses = [[NSArray alloc]
-                      initWithObjects:@"http://www.yahoo.com",
-                      @"http:/www.google.com", @"http://www.apple.com",
-                      @"http://www.ebookfrenzy.com", nil];
+    //TODO in the "real" example then, this list would load depending on what got selected before...
+    _siteNames2 = [[NSArray alloc] initWithObjects:@"Techopedia", @"ipadNestedSearch",
+                  @"expertsExchange", @"splitViewDoc", nil];
+    
+    _siteAddresses2= [[NSArray alloc]
+                      initWithObjects:@"http://www.techotopia.com/index.php/An_iPad_iOS_7_Split_View_and_Popover_Example",
+                      @"https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=iPad+nested+master+detail", @"http://www.experts-exchange.com/Hardware/Apple_Hardware/iPad/Q_28117340.html",
+                      @"https://developer.apple.com/library/ios/documentation/uikit/reference/UISplitViewController_class/Reference/Reference.html", nil];
     
     self.detailViewController = (DetailViewController *)
     [[self.splitViewController.viewControllers lastObject]
@@ -46,31 +48,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-#pragma mark - Table View
+#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _siteNames.count;
+    // Return the number of rows in the section.
+    return _siteNames2.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Cell2";
     
     UITableViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -83,25 +77,31 @@
     //NSDate *object = _objects[indexPath.row];
     //cell.textLabel.text = [object description];
     
-    cell.textLabel.text = _siteNames[indexPath.row];
+    cell.textLabel.text = _siteNames2[indexPath.row];
     return cell;
 }
 
+/*
+// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
+*/
 
+/*
+// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
 }
+*/
 
 /*
 // Override to support rearranging the table view.
@@ -119,11 +119,20 @@
 }
 */
 
-//could use something like this to load my webview with the form to fill out.
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //TODO:  in this method I would need to call the next master list pop over depending on which was selected.
-    NSString *urlString = [_siteAddresses
+    NSString *urlString = [_siteAddresses2
                            objectAtIndex:indexPath.row];
     NSURL *url = [NSURL URLWithString:urlString];
     
